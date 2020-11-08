@@ -10,6 +10,10 @@ export const appRoutes: Routes = [
         path: 'book',
         loadChildren: () => import('./components/book/book.module').then(m => m.BookModule)
     },
+    {
+        path: 'my-account',
+        loadChildren: () => import('./components/my-account/my-account.module').then(m => m.MyAccountModule)
+    },
 
     {
         path: '**', redirectTo: 'home'
