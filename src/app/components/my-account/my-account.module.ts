@@ -7,6 +7,9 @@ import { MyAccountService } from 'src/app/service/myaccount.service';
 import { SignupComponent } from './signup/signup.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { LoginComponent } from './login/login.component';
+import { MyAccountComponent } from './my-account/my-account.component';
+import { MaterialModule } from 'src/app/materials/material';
+import { MatTabsModule } from '@angular/material/tabs';
 
 
 @NgModule({
@@ -15,12 +18,14 @@ import { LoginComponent } from './login/login.component';
         MyAccountRoutingModule,
         FormsModule,
         ReactiveFormsModule,
-        HttpClientModule
+        HttpClientModule,
+        MatTabsModule
     ],
     declarations: [
         LoginComponent,
         SignupComponent,
-        ForgetPasswordComponent
+        ForgetPasswordComponent,
+        MyAccountComponent
     ],
     providers: [MyAccountService]
 })
