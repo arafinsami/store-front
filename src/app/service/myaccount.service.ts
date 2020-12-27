@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { BASE_URL } from '../constants/api.endpoint';
+import { BASE_URL, SIGNUP_URL } from '../constants/api.endpoint';
 import { map } from 'rxjs/operators';
+import { SignupDto } from '../dtos/signup.dto';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class MyAccountService {
@@ -37,5 +39,9 @@ export class MyAccountService {
     logout() {
         localStorage.removeItem('token');
         sessionStorage.clear();
+    }
+
+    public signup(dto: SignupDto): Observable<any> {
+        return this.http.post(BASE_URL + SIGNUP_URL, dto);
     }
 }

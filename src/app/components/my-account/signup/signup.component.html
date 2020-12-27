@@ -1,1 +1,76 @@
-<p>signup works!</p>
+<form class="form-horizontal" [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+        <div class="col-sm-7">
+            <input type="text"
+                [ngClass]="{'invalid-feedback' : signUpForm.get('username').errors && signUpForm.get('username').touched}"
+                class="form-control" formControlName="username" placeholder="username">
+
+            <div class="invalid-feedback"
+                *ngIf="signUpForm.get('username').hasError('required') && signUpForm.get('username').touched">
+                username required
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-7">
+            <input type="text"
+                [ngClass]="{'invalid-feedback' : signUpForm.get('password').errors && signUpForm.get('password').touched}"
+                class="form-control" formControlName="password" placeholder="password">
+
+            <div class="invalid-feedback"
+                *ngIf="signUpForm.get('password').hasError('required') && signUpForm.get('password').touched">
+                password required
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-7">
+            <input type="text"
+                [ngClass]="{'invalid-feedback' : signUpForm.get('firstName').errors && signUpForm.get('firstName').touched}"
+                class="form-control" formControlName="firstName" placeholder="first name">
+
+            <div class="invalid-feedback"
+                *ngIf="signUpForm.get('firstName').hasError('required') && signUpForm.get('firstName').touched">
+                first name required
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-7">
+            <input type="text"
+                [ngClass]="{'invalid-feedback' : signUpForm.get('lastName').errors && signUpForm.get('lastName').touched}"
+                class="form-control" formControlName="lastName" placeholder="last name">
+
+            <div class="invalid-feedback"
+                *ngIf="signUpForm.get('lastName').hasError('required') && signUpForm.get('lastName').touched">
+                last name required
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-7">
+            <input type="text"
+                [ngClass]="{'invalid-feedback' : signUpForm.get('email').errors && signUpForm.get('email').touched}"
+                class="form-control" formControlName="email" placeholder="email">
+
+            <div class="invalid-feedback"
+                *ngIf="signUpForm.get('email').hasError('required') && signUpForm.get('email').touched">
+                email required
+            </div>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label class="col-sm-3 control-label"></label>
+        <div class="col-sm-7">
+            <a [routerLink]="['/home']" class="button-cancel btn btn-danger">Cancel</a>
+            <button type="submit" [disabled]="!signUpForm.valid" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+</form>
