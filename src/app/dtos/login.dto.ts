@@ -6,7 +6,7 @@ export class LoginDto {
 
     password: String;
 
-    public from(login: Login): LoginDto {
+    public to(login: Login): LoginDto {
 
         let dto: LoginDto = new LoginDto();
         dto.username = login.username;

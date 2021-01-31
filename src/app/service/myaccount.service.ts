@@ -5,6 +5,7 @@ import { BASE_URL, SIGNUP_URL } from '../constants/api.endpoint';
 import { map } from 'rxjs/operators';
 import { SignupDto } from '../dtos/signup.dto';
 import { Observable } from 'rxjs';
+import { ForgetPasswordDto } from '../dtos/forgetpassword.dto';
 
 @Injectable()
 export class MyAccountService {
@@ -42,6 +43,10 @@ export class MyAccountService {
     }
 
     public signup(dto: SignupDto): Observable<any> {
+        return this.http.post(BASE_URL + SIGNUP_URL, dto);
+    }
+
+    public forgetPassword(dto: ForgetPasswordDto): Observable<any> {
         return this.http.post(BASE_URL + SIGNUP_URL, dto);
     }
 }
