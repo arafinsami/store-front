@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { MyAccountComponent } from './my-account/my-account.component';
 import { MaterialModule } from 'src/app/materials/material';
 import { MatTabsModule } from '@angular/material/tabs';
+import { ToastarService } from 'src/app/service/toastar.service';
 
 
 @NgModule({
@@ -27,6 +28,6 @@ import { MatTabsModule } from '@angular/material/tabs';
         ForgetPasswordComponent,
         MyAccountComponent
     ],
-    providers: [MyAccountService]
+    providers: [MyAccountService, ToastarService]
 })
 export class MyAccountModule { }

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { SignupDto } from 'src/app/dtos/signup.dto';
 import { Signup } from 'src/app/models/signup';
 import { MyAccountService } from 'src/app/service/myaccount.service';
+import { ToastarService } from 'src/app/service/toastar.service';
 
 @Component({
   selector: 'app-signup',
@@ -20,6 +21,7 @@ export class SignupComponent implements OnInit {
   constructor(
     private service: MyAccountService,
     private fb: FormBuilder,
+    private toastr: ToastarService,
     private route: Router
   ) { }
 
@@ -43,10 +45,11 @@ export class SignupComponent implements OnInit {
       this.dto = this.dto.to(this.signUp);
       this.service.signup(this.dto).subscribe(response => {
         this.signUpForm.reset();
-        this.route.navigateByUrl('/home');
+        this.toastr.success('signup successfully');
+        this.route.navigateByUrl('/my-account/account');
         console.log(response);
       }, error => {
-        console.log(error);
+        this.toastr.error('signup failed');
       });
     }
   }

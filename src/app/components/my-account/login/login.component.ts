@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { LoginDto } from 'src/app/dtos/login.dto';
 import { Login } from 'src/app/models/login';
 import { MyAccountService } from 'src/app/service/myaccount.service';
+import { ToastarService } from 'src/app/service/toastar.service';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private service: MyAccountService,
     private fb: FormBuilder,
+    private toastr: ToastarService,
     private route: Router
   ) { }
 
@@ -39,10 +41,11 @@ export class LoginComponent implements OnInit {
       this.dto = this.dto.to(this.login);
       this.service.login(this.dto).subscribe(response => {
         this.loginForm.reset();
-        this.route.navigateByUrl('/home');
+        this.toastr.success('login successfully');
+        this.route.navigateByUrl('/my-account/account');
         console.log(response);
       }, error => {
-        console.log(error);
+        this.toastr.error('login failed');
       });
     }
   }

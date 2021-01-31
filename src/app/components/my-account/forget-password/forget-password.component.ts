@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ForgetPasswordDto } from 'src/app/dtos/forgetpassword.dto';
 import { ForgetPassword } from 'src/app/models/forgetpassword';
 import { MyAccountService } from 'src/app/service/myaccount.service';
+import { ToastarService } from 'src/app/service/toastar.service';
 
 @Component({
   selector: 'app-forget-password',
@@ -19,6 +20,7 @@ export class ForgetPasswordComponent implements OnInit {
   constructor(
     private service: MyAccountService,
     private fb: FormBuilder,
+    private toastr: ToastarService,
     private route: Router
   ) { }
 
@@ -38,10 +40,11 @@ export class ForgetPasswordComponent implements OnInit {
       this.dto = this.dto.to(this.password);
       this.service.forgetPassword(this.dto).subscribe(response => {
         this.passwordForm.reset();
-        this.route.navigateByUrl('/home');
+        this.toastr.success('forget password sent successfully');
+        this.route.navigateByUrl('/my-account/account');
         console.log(response);
       }, error => {
-        console.log(error);
+        this.toastr.error('not found user');
       });
     }
   }

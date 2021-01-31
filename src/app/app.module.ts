@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes';
 import 'hammerjs';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes, { relativeLinkResolution: "legacy" })
+    RouterModule.forRoot(appRoutes, { relativeLinkResolution: "legacy" }),
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

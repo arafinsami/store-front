@@ -15,7 +15,7 @@ export class MyAccountService {
     jwtHelper = new JwtHelperService();
 
     login(model: any) {
-        return this.http.post(BASE_URL + 'login', model)
+        return this.http.post(BASE_URL + 'my-account/login', model)
             .pipe(
                 map((response: any) => {
                     let data = response;
