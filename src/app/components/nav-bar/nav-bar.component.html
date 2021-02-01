@@ -10,7 +10,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" [routerLink]="['/home']">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <form class="form-inline my-2 my-lg-0">
@@ -19,7 +19,7 @@
         </form>
       </li>
     </ul>
-    <ul class="navbar-nav" style="margin-right: 100px;">
+    <!-- <ul class="navbar-nav" style="margin-right: 100px;">
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
@@ -31,6 +31,18 @@
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Something else here</a>
         </div>
+      </li>
+    </ul> -->
+
+    <ul class="navbar-nav" style="margin-right: 100px;">
+      <li class="nav-item" *ngIf="myAccountService.getLogggedInStatus() == 'true'">
+        <a class="nav-link" [routerLink]="['/my-account/account']">Myaccount</a>
+      </li>
+      <li class="nav-item" *ngIf="myAccountService.getLogggedInStatus() == 'true'">
+        <a class="nav-link" [routerLink]="['/my-account/account']">Shopping Cart</a>
+      </li>
+      <li class="nav-item" *ngIf="myAccountService.getLogggedInStatus() == 'true'">
+        <a class="nav-link" (click)="logout()">Logout</a>
       </li>
     </ul>
   </div>

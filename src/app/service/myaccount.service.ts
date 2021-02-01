@@ -7,7 +7,9 @@ import { SignupDto } from '../dtos/signup.dto';
 import { Observable } from 'rxjs';
 import { ForgetPasswordDto } from '../dtos/forgetpassword.dto';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root',
+})
 export class MyAccountService {
 
     constructor(private http: HttpClient) { }
@@ -23,6 +25,7 @@ export class MyAccountService {
                     if (user != null) {
                         const tokenStr = 'Bearer ' + user.token;
                         localStorage.setItem('token', tokenStr);
+                        localStorage.setItem('isLoggedIn', 'true');
                     }
                 })
             );
@@ -37,16 +40,19 @@ export class MyAccountService {
         return localStorage.getItem('token');
     }
 
-    logout() {
-        localStorage.removeItem('token');
-        sessionStorage.clear();
+    getLogggedInStatus(): string {
+        return localStorage.getItem('isLoggedIn');
     }
 
-    public signup(dto: SignupDto): Observable<any> {
+    logout() {
+        localStorage.clear();
+    }
+
+    signup(dto: SignupDto): Observable<any> {
         return this.http.post(BASE_URL + SIGNUP_URL, dto);
     }
 
-    public forgetPassword(dto: ForgetPasswordDto): Observable<any> {
+    forgetPassword(dto: ForgetPasswordDto): Observable<any> {
         return this.http.post(BASE_URL + SIGNUP_URL, dto);
     }
 }

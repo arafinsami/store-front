@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MyAccountService } from 'src/app/service/myaccount.service';
+import { ToastarService } from 'src/app/service/toastar.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public myAccountService: MyAccountService,
+    private toastar: ToastarService
+  ) { }
 
   ngOnInit(): void {
   }
 
+  logout() {
+    this.myAccountService.logout();
+    this.toastar.success('you have successfully logged out !!!');
+  }
 }

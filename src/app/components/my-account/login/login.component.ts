@@ -43,7 +43,6 @@ export class LoginComponent implements OnInit {
         this.loginForm.reset();
         this.toastr.success('login successfully');
         this.route.navigateByUrl('/my-account/account');
-        console.log(response);
       }, error => {
         this.toastr.error('login failed');
       });

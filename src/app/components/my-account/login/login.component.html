@@ -1,4 +1,3 @@
-
 <form class="form-horizontal" [formGroup]="loginForm" (ngSubmit)="onSubmit()" style="margin-top: 20px;">
 
     <div class="form-group">
@@ -28,10 +27,13 @@
     </div>
 
     <div class="form-group">
-        <label class="col-sm-3 control-label"></label>
-        <div class="col-sm-7">
-            <a [routerLink]="['/home']" class="button-cancel btn btn-danger">Cancel</a>
-            <button type="submit" [disabled]="!loginForm.valid" class="btn btn-primary">Submit</button>
+        <div class="row" style="margin-left: 3px;">
+            <div class="col-sm-1">
+                <a [routerLink]="['/home']" class="button-cancel btn btn-danger">Cancel</a>
+            </div>
+            <div class="col-sm-1">
+                <button type="submit" [disabled]="!loginForm.valid" class="btn btn-primary">Submit</button>
+            </div>
         </div>
     </div>
 </form>
