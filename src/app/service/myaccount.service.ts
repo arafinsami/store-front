@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { BASE_URL, SIGNUP_URL } from '../constants/api.endpoint';
+import { LOGIN_URL, SIGNUP_URL, FORGET_PASSWORD_URL } from '../constants/api.endpoint';
 import { map } from 'rxjs/operators';
 import { SignupDto } from '../dtos/signup.dto';
 import { Observable } from 'rxjs';
 import { ForgetPasswordDto } from '../dtos/forgetpassword.dto';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root',
@@ -17,7 +18,7 @@ export class MyAccountService {
     jwtHelper = new JwtHelperService();
 
     login(model: any) {
-        return this.http.post(BASE_URL + 'my-account/login', model)
+        return this.http.post(environment.BASE_URL + LOGIN_URL, model)
             .pipe(
                 map((response: any) => {
                     let data = response;
@@ -49,10 +50,10 @@ export class MyAccountService {
     }
 
     signup(dto: SignupDto): Observable<any> {
-        return this.http.post(BASE_URL + SIGNUP_URL, dto);
+        return this.http.post(environment.BASE_URL + SIGNUP_URL, dto);
     }
 
     forgetPassword(dto: ForgetPasswordDto): Observable<any> {
-        return this.http.post(BASE_URL + SIGNUP_URL, dto);
+        return this.http.post(environment.BASE_URL + FORGET_PASSWORD_URL, dto);
     }
 }
