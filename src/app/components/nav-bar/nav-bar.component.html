@@ -34,14 +34,18 @@
       </li>
     </ul> -->
 
+    <ul class="navbar-nav" style="margin-right: 100px;">
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/my-account/account']">My Account</a>
+      </li>
+    </ul>
     <ul class="navbar-nav" style="margin-right: 100px;" *ngIf="myAccountService.getLogggedInStatus() == 'true'">
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
-          Dropdown
+          Profile
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" [routerLink]="['/my-account/account']">My Account</a>
           <a class="dropdown-item" [routerLink]="['/my-profile/profile']">My Profile</a>
           <a class="dropdown-item" [routerLink]="['/my-account/account']">Shopping Cart</a>
           <a class="dropdown-item" (click)="logout()">Logout</a>

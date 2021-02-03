@@ -27,6 +27,7 @@ export class MyAccountService {
                         const tokenStr = 'Bearer ' + user.token;
                         localStorage.setItem('token', tokenStr);
                         localStorage.setItem('isLoggedIn', 'true');
+                        localStorage.setItem('username', user.username);
                     }
                 })
             );
