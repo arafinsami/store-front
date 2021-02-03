@@ -11,13 +11,12 @@ import { ToastarService } from 'src/app/service/toastar.service';
 })
 export class ViewUserComponent implements OnInit {
 
-  id: any;
   profile: Profile;
   dto: ProfileDto = new ProfileDto;
   username: string;
 
   constructor(
-    private service: MyProfileService,
+    private myProfileService: MyProfileService,
     private toastar: ToastarService,
   ) { }
 
@@ -26,7 +25,7 @@ export class ViewUserComponent implements OnInit {
   }
 
   getUserInfo() {
-    this.service.viewProfile(localStorage.getItem('username')).subscribe(response => {
+    this.myProfileService.viewProfile(localStorage.getItem('username')).subscribe(response => {
       this.profile = response.data;
       this.dto = this.dto.from(this.profile);
     }, error => {

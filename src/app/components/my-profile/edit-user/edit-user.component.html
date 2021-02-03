@@ -1,1 +1,78 @@
-<p>edit-user works!</p>
+
+<form class="form-horizontal" [formGroup]="editProfileForm" (ngSubmit)="onSubmit()" style="margin-top: 20px;">
+
+    <div class="form-group">
+        <div class="col-sm-7">
+            <label>username</label>
+            <input type="text" class="form-control" formControlName="username" placeholder="username" readonly>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-7">
+            <label>password</label>
+            <input type="text"
+                [ngClass]="{'invalid-feedback' : editProfileForm.get('password').errors && editProfileForm.get('password').touched}"
+                class="form-control" formControlName="password" placeholder="password">
+
+            <div class="invalid-feedback"
+                *ngIf="editProfileForm.get('password').hasError('required') && editProfileForm.get('password').touched">
+                password required
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-7">
+            <label>first name</label>
+            <input type="text"
+                [ngClass]="{'invalid-feedback' : editProfileForm.get('firstName').errors && editProfileForm.get('firstName').touched}"
+                class="form-control" formControlName="firstName" placeholder="first name">
+
+            <div class="invalid-feedback"
+                *ngIf="editProfileForm.get('firstName').hasError('required') && editProfileForm.get('firstName').touched">
+                first name required
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-7">
+            <label>last name</label>
+            <input type="text"
+                [ngClass]="{'invalid-feedback' : editProfileForm.get('lastName').errors && editProfileForm.get('lastName').touched}"
+                class="form-control" formControlName="lastName" placeholder="last name">
+
+            <div class="invalid-feedback"
+                *ngIf="editProfileForm.get('lastName').hasError('required') && editProfileForm.get('lastName').touched">
+                last name required
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-7">
+            <label>email</label>
+            <input type="text"
+                [ngClass]="{'invalid-feedback' : editProfileForm.get('email').errors && editProfileForm.get('email').touched}"
+                class="form-control" formControlName="email" placeholder="email">
+
+            <div class="invalid-feedback"
+                *ngIf="editProfileForm.get('email').hasError('required') && editProfileForm.get('email').touched">
+                email required
+            </div>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="row" style="margin-left: 3px;">
+            <div class="col-sm-1">
+                <a [routerLink]="['/home']" class="button-cancel btn btn-danger">Cancel</a>
+            </div>
+            <div class="col-sm-1">
+                <button type="submit" [disabled]="!editProfileForm.valid" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </div>
+</form>

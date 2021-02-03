@@ -11,6 +11,7 @@ import { ShippingComponent } from "./shipping/shipping.component";
 import { ViewUserComponent } from "./view-user/view-user.component";
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { MyProfileService } from "src/app/service/my-profile.service";
+import { BillingComponent } from './billing/billing.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { MyProfileService } from "src/app/service/my-profile.service";
         EditUserComponent,
         OrderComponent,
         ShippingComponent,
-        MyProfileComponent
+        MyProfileComponent,
+        BillingComponent
     ],
     providers: [MyProfileService, ToastarService]
 })
