@@ -4,7 +4,9 @@ import { Router } from '@angular/router';
 import { ProfileDto } from 'src/app/dtos/profile.dto';
 import { Profile } from 'src/app/models/profile';
 import { MyProfileService } from 'src/app/service/my-profile.service';
+import { MyAccountService } from 'src/app/service/myaccount.service';
 import { ToastarService } from 'src/app/service/toastar.service';
+
 
 @Component({
   selector: 'app-edit-user',
@@ -20,6 +22,7 @@ export class EditUserComponent implements OnInit {
 
   constructor(
     private myProfileService: MyProfileService,
+    private myAccountService: MyAccountService,
     private fb: FormBuilder,
     private toastar: ToastarService,
     private route: Router
@@ -43,7 +46,7 @@ export class EditUserComponent implements OnInit {
   }
 
   getUserInfo() {
-    this.myProfileService.viewProfile(localStorage.getItem('username')).subscribe(response => {
+    this.myProfileService.viewProfile(this.myAccountService.getLogggedInUser()).subscribe(response => {
       this.profile = response.data;
       this.dto = this.dto.from(this.profile);
       this.editProfileForm.reset(this.dto);

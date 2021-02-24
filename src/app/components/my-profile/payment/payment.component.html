@@ -1,0 +1,56 @@
+<form class="form-horizontal" [formGroup]="paymentForm" (ngSubmit)="onSubmit()" style="margin-top: 20px;">
+
+    <div class="form-group">
+        <div class="col-sm-7">
+            <select class="form-control" formControlName="type"
+                [ngClass]="{'invalid-feedback' : paymentForm.get('type').errors && paymentForm.get('type').touched}"
+                class="form-control">
+                <option value="" disabled selected hidden>select card type</option>
+                <option value="visa">Visa</option>
+                <option value="mastercard">Mastercard</option>
+                <option value="amex">American Express</option>
+            </select>
+            <div class="invalid-feedback"
+                *ngIf="paymentForm.get('type').hasError('required') && paymentForm.get('type').touched">
+                card type required
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-7">
+            <input type="text"
+                [ngClass]="{'invalid-feedback' : paymentForm.get('cardName').errors && paymentForm.get('cardName').touched}"
+                class="form-control" formControlName="cardName" placeholder="card name">
+
+            <div class="invalid-feedback"
+                *ngIf="paymentForm.get('cardName').hasError('required') && paymentForm.get('cardName').touched">
+                card name required
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-7">
+            <input type="text"
+                [ngClass]="{'invalid-feedback' : paymentForm.get('cardNumber').errors && paymentForm.get('cardNumber').touched}"
+                class="form-control" formControlName="cardNumber" placeholder="card number">
+
+            <div class="invalid-feedback"
+                *ngIf="paymentForm.get('cardNumber').hasError('required') && paymentForm.get('cardNumber').touched">
+                card number required
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="row" style="margin-left: 3px;">
+            <div class="col-sm-1">
+                <a [routerLink]="['/my-profile/profile']" class="button-cancel btn btn-danger">Cancel</a>
+            </div>
+            <div class="col-sm-1">
+                <button type="submit" [disabled]="!paymentForm.valid" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </div>
+</form>

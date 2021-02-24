@@ -46,6 +46,10 @@ export class MyAccountService {
         return localStorage.getItem('isLoggedIn');
     }
 
+    getLogggedInUser(): string {
+        return localStorage.getItem('username');
+    }
+
     logout() {
         localStorage.clear();
     }

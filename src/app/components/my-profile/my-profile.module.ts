@@ -11,7 +11,8 @@ import { ShippingComponent } from "./shipping/shipping.component";
 import { ViewUserComponent } from "./view-user/view-user.component";
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { MyProfileService } from "src/app/service/my-profile.service";
-import { BillingComponent } from './billing/billing.component';
+import { PaymentComponent } from './payment/payment.component';
+import { MyAccountService } from "src/app/service/myaccount.service";
 
 
 @NgModule({
@@ -29,8 +30,12 @@ import { BillingComponent } from './billing/billing.component';
         OrderComponent,
         ShippingComponent,
         MyProfileComponent,
-        BillingComponent
+        PaymentComponent
     ],
-    providers: [MyProfileService, ToastarService]
+    providers: [
+        MyProfileService,
+        MyAccountService,
+        ToastarService
+    ]
 })
 export class MyProfileModule { }
