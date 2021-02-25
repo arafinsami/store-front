@@ -13,6 +13,7 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
 import { MyProfileService } from "src/app/service/my-profile.service";
 import { PaymentComponent } from './payment/payment.component';
 import { MyAccountService } from "src/app/service/myaccount.service";
+import { httpInterceptorProviders } from "src/app/interceptor/auth-interceptor";
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { MyAccountService } from "src/app/service/myaccount.service";
     providers: [
         MyProfileService,
         MyAccountService,
-        ToastarService
+        ToastarService,
+        httpInterceptorProviders
     ]
 })
 export class MyProfileModule { }
