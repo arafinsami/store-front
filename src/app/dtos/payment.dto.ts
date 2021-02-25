@@ -34,13 +34,7 @@ export class PaymentDto {
         dto.cvc                    = payment.cvc;
         dto.holderName             = payment.holderName;
         dto.defaultPayment         = payment.defaultPayment;
-        dto.billing.billingName    = payment.billing.billingName;
-        dto.billing.billingStreet1 = payment.billing.billingStreet1;
-        dto.billing.billingStreet2 = payment.billing.billingStreet2;
-        dto.billing.billingCity    = payment.billing.billingCity;
-        dto.billing.billingState   = payment.billing.billingState;
-        dto.billing.billingCountry = payment.billing.billingCountry;
-        dto.billing.billingZipcode = payment.billing.billingZipcode;
+        dto.billing                = payment.billing;
         return dto;
     }
 
@@ -56,13 +50,7 @@ export class PaymentDto {
         dto.cvc                    = payment.cvc;
         dto.holderName             = payment.holderName;
         dto.defaultPayment         = payment.defaultPayment;
-        dto.billing.billingName    = payment.billing.billingName;
-        dto.billing.billingStreet1 = payment.billing.billingStreet1;
-        dto.billing.billingStreet2 = payment.billing.billingStreet2;
-        dto.billing.billingCity    = payment.billing.billingCity;
-        dto.billing.billingState   = payment.billing.billingState;
-        dto.billing.billingCountry = payment.billing.billingCountry;
-        dto.billing.billingZipcode = payment.billing.billingZipcode;
+        dto.billing                = payment.billing;
         return dto;
     }
 

@@ -104,23 +104,23 @@
             <div class="col-sm-4">
                 <input type="text"
                     [ngClass]="{'invalid-feedback' : paymentForm.get('holderName').errors && paymentForm.get('holderName').touched}"
-                    class="form-control" formControlName="holderName" placeholder="holder name">
+                    class="form-control" formControlName="holderName" placeholder="card holder name">
 
                 <div class="invalid-feedback"
                     *ngIf="paymentForm.get('holderName').hasError('required') && paymentForm.get('holderName').touched">
-                    holder name required
+                    card holder name required
                 </div>
             </div>
 
             <div class="col-sm-4">
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" formControlName="defaultPayment" value="0" checked>
+                    <input class="form-check-input" type="radio" formControlName="defaultPayment" value="true" checked>
                     <label class="form-check-label">
                         default payment
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" formControlName="defaultPayment" value="1">
+                    <input class="form-check-input" type="radio" formControlName="defaultPayment" value="false">
                     <label class="form-check-label">
                         other
                     </label>
@@ -165,7 +165,7 @@
 
     <div class="form-group">
         <div class="row" style="margin-left: 3px;margin-right: 3px;">
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <select class="form-control" formControlName="billingCity"
                     [ngClass]="{'invalid-feedback' : paymentForm.get('billingCity').errors && paymentForm.get('billingCity').touched}"
                     class="form-control">
@@ -179,7 +179,7 @@
                     billing city required
                 </div>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <select class="form-control" formControlName="billingState"
                     [ngClass]="{'invalid-feedback' : paymentForm.get('billingState').errors && paymentForm.get('billingState').touched}"
                     class="form-control">
@@ -193,7 +193,23 @@
                     billing state required
                 </div>
             </div>
-            <div class="col-sm-4">
+
+
+            <div class="col-sm-3">
+                <select class="form-control" formControlName="billingCountry"
+                    [ngClass]="{'invalid-feedback' : paymentForm.get('billingCountry').errors && paymentForm.get('billingCountry').touched}"
+                    class="form-control">
+                    <option value="" disabled selected hidden>select billing country</option>
+                    <option value="Bangladesh">Bangladesh</option>
+                    <option value="USA">USA</option>
+                </select>
+                <div class="invalid-feedback"
+                    *ngIf="paymentForm.get('billingCountry').hasError('required') && paymentForm.get('billingCountry').touched">
+                    billing country required
+                </div>
+            </div>
+
+            <div class="col-sm-3">
                 <input type="text"
                     [ngClass]="{'invalid-feedback' : paymentForm.get('billingZipcode').errors && paymentForm.get('billingZipcode').touched}"
                     class="form-control" formControlName="billingZipcode" placeholder="billing zipcode">
