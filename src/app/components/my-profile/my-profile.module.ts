@@ -14,6 +14,7 @@ import { MyProfileService } from "src/app/service/my-profile.service";
 import { PaymentComponent } from './payment/payment.component';
 import { MyAccountService } from "src/app/service/myaccount.service";
 import { httpInterceptorProviders } from "src/app/interceptor/auth-interceptor";
+import { NgxSpinnerModule } from "ngx-spinner";
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { httpInterceptorProviders } from "src/app/interceptor/auth-interceptor";
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
-        MatTabsModule
+        MatTabsModule,
+        NgxSpinnerModule
     ],
     declarations: [
         ViewUserComponent,

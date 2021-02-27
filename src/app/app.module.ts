@@ -11,6 +11,8 @@ import { appRoutes } from './routes';
 import 'hammerjs';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { ToastrModule } from 'ngx-toastr';
+import { NgxSpinnerModule } from 'ngx-spinner';
+
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { ToastrModule } from 'ngx-toastr';
     RouterModule.forRoot(appRoutes, { relativeLinkResolution: "legacy" }),
     ToastrModule.forRoot()
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

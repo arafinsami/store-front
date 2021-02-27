@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { LoginDto } from 'src/app/dtos/login.dto';
 import { Login } from 'src/app/models/login';
 import { MyAccountService } from 'src/app/service/myaccount.service';
@@ -21,7 +22,8 @@ export class LoginComponent implements OnInit {
     private service: MyAccountService,
     private fb: FormBuilder,
     private toastr: ToastarService,
-    private route: Router
+    private route: Router,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit(): void {
@@ -39,10 +41,12 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       this.login = Object.assign({}, this.loginForm.value);
       this.dto = this.dto.to(this.login);
+      this.spinner.show();
       this.service.login(this.dto).subscribe(response => {
         this.loginForm.reset();
         this.toastr.success('login successfully');
-        this.route.navigateByUrl('/my-account/account');
+        this.spinner.hide();
+        this.route.navigateByUrl('/my-profile/profile');
       }, error => {
         this.toastr.error('login failed');
       });

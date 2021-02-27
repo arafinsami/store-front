@@ -11,6 +11,7 @@ import { MyAccountComponent } from './my-account/my-account.component';
 import { MaterialModule } from 'src/app/materials/material';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ToastarService } from 'src/app/service/toastar.service';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { ToastarService } from 'src/app/service/toastar.service';
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
-        MatTabsModule
+        MatTabsModule,
+        NgxSpinnerModule
     ],
     declarations: [
         LoginComponent,
