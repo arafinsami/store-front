@@ -22,4 +22,16 @@ export class MyProfileService {
         return this.http.post(environment.BASE_URL + 'my-profile/add/payment', dto);
     }
 
+    public viewPaymentsByAppUser(username: string): Observable<any> {
+        return this.http.get(environment.BASE_URL + 'my-profile/view/payments/' + username);
+    }
+
+    public findByPaymentId(paymentId: Number): Observable<any> {
+        return this.http.get(environment.BASE_URL + 'my-profile/view/payment/' + paymentId);
+    }
+
+    public updatePayment(dto: PaymentDto): Observable<any> {
+        return this.http.put(environment.BASE_URL + 'my-profile/update/payment', dto);
+    }
+
 }

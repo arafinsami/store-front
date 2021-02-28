@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  BASE_URL: 'https://book-store-api123.herokuapp.com/'
+  //BASE_URL: 'https://book-store-api123.herokuapp.com/',
+  BASE_URL: 'http://localhost:8080/'
 };
 
 /*

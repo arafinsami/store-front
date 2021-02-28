@@ -54,4 +54,10 @@ export class PaymentDto {
         return dto;
     }
 
+    public getPaymentList(payments: Payment[]): PaymentDto[] {
+        const list: PaymentDto[] = [];
+        payments.forEach(payment => list.push(this.from(payment)));
+        return list;
+    }
+
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { PaymentDto } from 'src/app/dtos/payment.dto';
 import { Billing } from 'src/app/models/billing';
@@ -8,13 +8,12 @@ import { Payment } from 'src/app/models/payment';
 import { MyProfileService } from 'src/app/service/my-profile.service';
 import { ToastarService } from 'src/app/service/toastar.service';
 
-
 @Component({
-  selector: 'app-payment',
-  templateUrl: './payment.component.html',
-  styleUrls: ['./payment.component.css']
+  selector: 'app-payment-update',
+  templateUrl: './payment-update.component.html',
+  styleUrls: ['./payment-update.component.css']
 })
-export class PaymentComponent implements OnInit {
+export class PaymentUpdateComponent implements OnInit {
 
   payment: Payment;
   billing: Billing = new Billing();
@@ -22,7 +21,7 @@ export class PaymentComponent implements OnInit {
   paymentDtos: PaymentDto[];
   payments: Payment[];
   paymentForm: FormGroup;
-  selectedBillingTab = 0;
+  paymentId: any;
 
 
   constructor(
@@ -30,16 +29,18 @@ export class PaymentComponent implements OnInit {
     private fb: FormBuilder,
     private toastar: ToastarService,
     private spinner: NgxSpinnerService,
+    private activatedRoute: ActivatedRoute,
     private route: Router
   ) { }
 
   ngOnInit(): void {
     this.formInit();
-    this.viewPaymentsByAppUser();
+    this.getById();
   }
 
   formInit() {
     this.paymentForm = this.fb.group({
+      id: [''],
       type: ['', [Validators.required]],
       cardName: ['', [Validators.required]],
       cardNumber: ['', [Validators.required]],
@@ -62,16 +63,16 @@ export class PaymentComponent implements OnInit {
     if (this.paymentForm.valid) {
       this.payment = Object.assign({}, this.paymentForm.value);
       this.payment.billing = this.getBilling();
-      this.paymentDto = this.paymentDto.to(this.payment);
-      this.myProfileService.newPayment(this.paymentDto).subscribe(response => {
+      this.paymentDto = this.paymentDto.from(this.payment);
+      this.myProfileService.updatePayment(this.paymentDto).subscribe(response => {
         this.spinner.show();
-        this.toastar.success('payment added successfully');
+        this.toastar.success('payment updated successfully');
         this.spinner.hide();
         this.paymentForm.reset();
         this.route.navigateByUrl('/my-profile/profile');
         console.log(response);
       }, error => {
-        this.toastar.error('payment addition failed');
+        this.toastar.error('payment updating failed');
         console.log(error)
       });
     }
@@ -95,13 +96,13 @@ export class PaymentComponent implements OnInit {
     return this.billing;
   }
 
-  viewPaymentsByAppUser() {
-    this.spinner.show();
-    this.myProfileService.viewPaymentsByAppUser(localStorage.getItem('username')).subscribe(response => {
-      this.paymentDtos = response.data;
-      this.spinner.hide();
+  getById() {
+    this.paymentId = this.activatedRoute.snapshot.paramMap.get('id');
+    this.myProfileService.findByPaymentId(this.paymentId).subscribe(response => {
+      this.payment = response.data;
+      this.paymentForm.reset(this.paymentDto.from(this.payment));
     }, error => {
-      this.toastar.error('payment list not found !!!')
+      this.toastar.error(error);
     });
   }
 

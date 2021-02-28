@@ -1,235 +1,264 @@
-<form class="form-horizontal" [formGroup]="paymentForm" (ngSubmit)="onSubmit()" style="margin-top: 20px;">
-    <div class="form-group">
-        <div class="row" style="margin-left: 3px;margin-right: 3px;">
-            <div class="col-sm-4">
-                <select class="form-control" formControlName="type"
-                    [ngClass]="{'invalid-feedback' : paymentForm.get('type').errors && paymentForm.get('type').touched}"
-                    class="form-control">
-                    <option value="" disabled selected hidden>select card type</option>
-                    <option value="visa">Visa</option>
-                    <option value="mastercard">Mastercard</option>
-                    <option value="amex">American Express</option>
-                </select>
-                <div class="invalid-feedback"
-                    *ngIf="paymentForm.get('type').hasError('required') && paymentForm.get('type').touched">
-                    card type required
-                </div>
-            </div>
+<mat-tab-group mat-align-tabs="start">
+    <mat-tab label="Payment List">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Card name</th>
+                    <th scope="col">Card type</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let dtos of paymentDtos">
+                    <td>{{dtos.cardName}}</td>
+                    <td>{{dtos.type}}</td>
+                    <td>
+                        <a [routerLink]="['/my-profile/payment/update', dtos.id]">Update</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </mat-tab>
+    <mat-tab label="New Payment">
+        <form class="form-horizontal" [formGroup]="paymentForm" (ngSubmit)="onSubmit()" style="margin-top: 20px;">
+            <div class="form-group">
+                <div class="row" style="margin-left: 3px;margin-right: 3px;">
+                    <div class="col-sm-4">
+                        <select class="form-control" formControlName="type"
+                            [ngClass]="{'invalid-feedback' : paymentForm.get('type').errors && paymentForm.get('type').touched}"
+                            class="form-control">
+                            <option value="" disabled selected hidden>select card type</option>
+                            <option value="visa">Visa</option>
+                            <option value="mastercard">Mastercard</option>
+                            <option value="amex">American Express</option>
+                        </select>
+                        <div class="invalid-feedback"
+                            *ngIf="paymentForm.get('type').hasError('required') && paymentForm.get('type').touched">
+                            card type required
+                        </div>
+                    </div>
 
-            <div class="col-sm-4">
-                <input type="text"
-                    [ngClass]="{'invalid-feedback' : paymentForm.get('cardName').errors && paymentForm.get('cardName').touched}"
-                    class="form-control" formControlName="cardName" placeholder="card name">
+                    <div class="col-sm-4">
+                        <input type="text"
+                            [ngClass]="{'invalid-feedback' : paymentForm.get('cardName').errors && paymentForm.get('cardName').touched}"
+                            class="form-control" formControlName="cardName" placeholder="card name">
 
-                <div class="invalid-feedback"
-                    *ngIf="paymentForm.get('cardName').hasError('required') && paymentForm.get('cardName').touched">
-                    card name required
-                </div>
-            </div>
+                        <div class="invalid-feedback"
+                            *ngIf="paymentForm.get('cardName').hasError('required') && paymentForm.get('cardName').touched">
+                            card name required
+                        </div>
+                    </div>
 
-            <div class="col-sm-4">
-                <input type="text"
-                    [ngClass]="{'invalid-feedback' : paymentForm.get('cardNumber').errors && paymentForm.get('cardNumber').touched}"
-                    class="form-control" formControlName="cardNumber" placeholder="card number">
+                    <div class="col-sm-4">
+                        <input type="text"
+                            [ngClass]="{'invalid-feedback' : paymentForm.get('cardNumber').errors && paymentForm.get('cardNumber').touched}"
+                            class="form-control" formControlName="cardNumber" placeholder="card number">
 
-                <div class="invalid-feedback"
-                    *ngIf="paymentForm.get('cardNumber').hasError('required') && paymentForm.get('cardNumber').touched">
-                    card number required
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="form-group">
-        <div class="row" style="margin-left: 3px;margin-right: 3px;">
-            <div class="col-sm-4">
-                <select class="form-control" formControlName="expiryMonth"
-                    [ngClass]="{'invalid-feedback' : paymentForm.get('expiryMonth').errors && paymentForm.get('expiryMonth').touched}"
-                    class="form-control">
-                    <option value="" disabled selected hidden>select expiry month</option>
-                    <option value="1">Jan (01)</option>
-                    <option value="2">Feb (02)</option>
-                    <option value="3">Mar (03)</option>
-                    <option value="4">Apr (04)</option>
-                    <option value="5">May (05)</option>
-                    <option value="6">Jun (06)</option>
-                    <option value="7">July (07)</option>
-                    <option value="8">Aug (08)</option>
-                    <option value="9">Sep (09)</option>
-                    <option value="10">Oct (10)</option>
-                    <option value="11">Nov (11)</option>
-                    <option value="12">Dec (12)</option>
-                </select>
-                <div class="invalid-feedback"
-                    *ngIf="paymentForm.get('expiryMonth').hasError('required') && paymentForm.get('expiryMonth').touched">
-                    expiry month required
-                </div>
-            </div>
-
-            <div class="col-sm-4">
-                <select class="form-control" formControlName="expiryYear"
-                    [ngClass]="{'invalid-feedback' : paymentForm.get('expiryYear').errors && paymentForm.get('expiryYear').touched}"
-                    class="form-control">
-                    <option value="" disabled selected hidden>select expiry year</option>
-                    <option value="2017">2017</option>
-                    <option value="2018">2018</option>
-                    <option value="2019">2019</option>
-                    <option value="2020">2020</option>
-                    <option value="2020">2020</option>
-                    <option value="2022">2022</option>
-                </select>
-                <div class="invalid-feedback"
-                    *ngIf="paymentForm.get('expiryYear').hasError('required') && paymentForm.get('expiryYear').touched">
-                    expiry year required
-                </div>
-            </div>
-
-            <div class="col-sm-4">
-                <input type="tel"
-                    [ngClass]="{'invalid-feedback' : paymentForm.get('cvc').errors && paymentForm.get('cvc').touched}"
-                    class="form-control" formControlName="cvc" placeholder="CVC">
-
-                <div class="invalid-feedback"
-                    *ngIf="paymentForm.get('cvc').hasError('required') && paymentForm.get('cvc').touched">
-                    cvc required
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="form-group">
-        <div class="row" style="margin-left: 3px;margin-right: 3px;">
-            <div class="col-sm-4">
-                <input type="text"
-                    [ngClass]="{'invalid-feedback' : paymentForm.get('holderName').errors && paymentForm.get('holderName').touched}"
-                    class="form-control" formControlName="holderName" placeholder="card holder name">
-
-                <div class="invalid-feedback"
-                    *ngIf="paymentForm.get('holderName').hasError('required') && paymentForm.get('holderName').touched">
-                    card holder name required
-                </div>
-            </div>
-
-            <div class="col-sm-4">
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" formControlName="defaultPayment" value="true" checked>
-                    <label class="form-check-label">
-                        default payment
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" formControlName="defaultPayment" value="false">
-                    <label class="form-check-label">
-                        other
-                    </label>
-                </div>
-            </div>
-
-            <div class="col-sm-4">
-                <input type="text"
-                    [ngClass]="{'invalid-feedback' : paymentForm.get('billingName').errors && paymentForm.get('billingName').touched}"
-                    class="form-control" formControlName="billingName" placeholder="billing name">
-
-                <div class="invalid-feedback"
-                    *ngIf="paymentForm.get('billingName').hasError('required') && paymentForm.get('billingName').touched">
-                    billing name required
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-    <div class="form-group">
-        <div class="row" style="margin-left: 3px;margin-right: 3px;">
-            <div class="col-sm-6">
-                <textarea rows="3"
-                    [ngClass]="{'invalid-feedback' : paymentForm.get('billingStreet1').errors && paymentForm.get('billingStreet1').touched}"
-                    class="form-control" formControlName="billingStreet1"
-                    placeholder="billing street(first)"></textarea>
-
-                <div class="invalid-feedback"
-                    *ngIf="paymentForm.get('billingStreet1').hasError('required') && paymentForm.get('billingStreet1').touched">
-                    billing street(first) required
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <textarea rows="3" class="form-control" formControlName="billingStreet2"
-                    placeholder="billing street(second)"></textarea>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="form-group">
-        <div class="row" style="margin-left: 3px;margin-right: 3px;">
-            <div class="col-sm-3">
-                <select class="form-control" formControlName="billingCity"
-                    [ngClass]="{'invalid-feedback' : paymentForm.get('billingCity').errors && paymentForm.get('billingCity').touched}"
-                    class="form-control">
-                    <option value="" disabled selected hidden>select billing city</option>
-                    <option value="Dhaka">Dhaka</option>
-                    <option value="Sylhet">Sylhet</option>
-                    <option value="Chittagong">Chittagong</option>
-                </select>
-                <div class="invalid-feedback"
-                    *ngIf="paymentForm.get('billingCity').hasError('required') && paymentForm.get('billingCity').touched">
-                    billing city required
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <select class="form-control" formControlName="billingState"
-                    [ngClass]="{'invalid-feedback' : paymentForm.get('billingState').errors && paymentForm.get('billingState').touched}"
-                    class="form-control">
-                    <option value="" disabled selected hidden>select billing city</option>
-                    <option value="Dhaka">Dhaka</option>
-                    <option value="Sylhet">Sylhet</option>
-                    <option value="Chittagong">Chittagong</option>
-                </select>
-                <div class="invalid-feedback"
-                    *ngIf="paymentForm.get('billingState').hasError('required') && paymentForm.get('billingState').touched">
-                    billing state required
+                        <div class="invalid-feedback"
+                            *ngIf="paymentForm.get('cardNumber').hasError('required') && paymentForm.get('cardNumber').touched">
+                            card number required
+                        </div>
+                    </div>
                 </div>
             </div>
 
 
-            <div class="col-sm-3">
-                <select class="form-control" formControlName="billingCountry"
-                    [ngClass]="{'invalid-feedback' : paymentForm.get('billingCountry').errors && paymentForm.get('billingCountry').touched}"
-                    class="form-control">
-                    <option value="" disabled selected hidden>select billing country</option>
-                    <option value="Bangladesh">Bangladesh</option>
-                    <option value="USA">USA</option>
-                </select>
-                <div class="invalid-feedback"
-                    *ngIf="paymentForm.get('billingCountry').hasError('required') && paymentForm.get('billingCountry').touched">
-                    billing country required
+            <div class="form-group">
+                <div class="row" style="margin-left: 3px;margin-right: 3px;">
+                    <div class="col-sm-4">
+                        <select class="form-control" formControlName="expiryMonth"
+                            [ngClass]="{'invalid-feedback' : paymentForm.get('expiryMonth').errors && paymentForm.get('expiryMonth').touched}"
+                            class="form-control">
+                            <option value="" disabled selected hidden>select expiry month</option>
+                            <option value="1">Jan (01)</option>
+                            <option value="2">Feb (02)</option>
+                            <option value="3">Mar (03)</option>
+                            <option value="4">Apr (04)</option>
+                            <option value="5">May (05)</option>
+                            <option value="6">Jun (06)</option>
+                            <option value="7">July (07)</option>
+                            <option value="8">Aug (08)</option>
+                            <option value="9">Sep (09)</option>
+                            <option value="10">Oct (10)</option>
+                            <option value="11">Nov (11)</option>
+                            <option value="12">Dec (12)</option>
+                        </select>
+                        <div class="invalid-feedback"
+                            *ngIf="paymentForm.get('expiryMonth').hasError('required') && paymentForm.get('expiryMonth').touched">
+                            expiry month required
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <select class="form-control" formControlName="expiryYear"
+                            [ngClass]="{'invalid-feedback' : paymentForm.get('expiryYear').errors && paymentForm.get('expiryYear').touched}"
+                            class="form-control">
+                            <option value="" disabled selected hidden>select expiry year</option>
+                            <option value="2017">2017</option>
+                            <option value="2018">2018</option>
+                            <option value="2019">2019</option>
+                            <option value="2020">2020</option>
+                            <option value="2020">2020</option>
+                            <option value="2022">2022</option>
+                        </select>
+                        <div class="invalid-feedback"
+                            *ngIf="paymentForm.get('expiryYear').hasError('required') && paymentForm.get('expiryYear').touched">
+                            expiry year required
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <input type="tel"
+                            [ngClass]="{'invalid-feedback' : paymentForm.get('cvc').errors && paymentForm.get('cvc').touched}"
+                            class="form-control" formControlName="cvc" placeholder="CVC">
+
+                        <div class="invalid-feedback"
+                            *ngIf="paymentForm.get('cvc').hasError('required') && paymentForm.get('cvc').touched">
+                            cvc required
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="col-sm-3">
-                <input type="text"
-                    [ngClass]="{'invalid-feedback' : paymentForm.get('billingZipcode').errors && paymentForm.get('billingZipcode').touched}"
-                    class="form-control" formControlName="billingZipcode" placeholder="billing zipcode">
 
-                <div class="invalid-feedback"
-                    *ngIf="paymentForm.get('billingZipcode').hasError('required') && paymentForm.get('billingZipcode').touched">
-                    billing zipcode required
+            <div class="form-group">
+                <div class="row" style="margin-left: 3px;margin-right: 3px;">
+                    <div class="col-sm-4">
+                        <input type="text"
+                            [ngClass]="{'invalid-feedback' : paymentForm.get('holderName').errors && paymentForm.get('holderName').touched}"
+                            class="form-control" formControlName="holderName" placeholder="card holder name">
+
+                        <div class="invalid-feedback"
+                            *ngIf="paymentForm.get('holderName').hasError('required') && paymentForm.get('holderName').touched">
+                            card holder name required
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" formControlName="defaultPayment" value="true"
+                                checked>
+                            <label class="form-check-label">
+                                default payment
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" formControlName="defaultPayment" value="false">
+                            <label class="form-check-label">
+                                other
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <input type="text"
+                            [ngClass]="{'invalid-feedback' : paymentForm.get('billingName').errors && paymentForm.get('billingName').touched}"
+                            class="form-control" formControlName="billingName" placeholder="billing name">
+
+                        <div class="invalid-feedback"
+                            *ngIf="paymentForm.get('billingName').hasError('required') && paymentForm.get('billingName').touched">
+                            billing name required
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <div class="form-group">
-        <div class="row" style="margin-left: 3px;">
-            <div class="col-sm-1">
-                <a [routerLink]="['/my-profile/profile']" class="button-cancel btn btn-danger">Cancel</a>
+
+
+            <div class="form-group">
+                <div class="row" style="margin-left: 3px;margin-right: 3px;">
+                    <div class="col-sm-6">
+                        <textarea rows="3"
+                            [ngClass]="{'invalid-feedback' : paymentForm.get('billingStreet1').errors && paymentForm.get('billingStreet1').touched}"
+                            class="form-control" formControlName="billingStreet1"
+                            placeholder="billing street(first)"></textarea>
+
+                        <div class="invalid-feedback"
+                            *ngIf="paymentForm.get('billingStreet1').hasError('required') && paymentForm.get('billingStreet1').touched">
+                            billing street(first) required
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <textarea rows="3" class="form-control" formControlName="billingStreet2"
+                            placeholder="billing street(second)"></textarea>
+                    </div>
+                </div>
             </div>
-            <div class="col-sm-1">
-                <button type="submit" [disabled]="!paymentForm.valid" class="btn btn-primary">Submit</button>
+
+
+            <div class="form-group">
+                <div class="row" style="margin-left: 3px;margin-right: 3px;">
+                    <div class="col-sm-3">
+                        <select class="form-control" formControlName="billingCity"
+                            [ngClass]="{'invalid-feedback' : paymentForm.get('billingCity').errors && paymentForm.get('billingCity').touched}"
+                            class="form-control">
+                            <option value="" disabled selected hidden>select billing city</option>
+                            <option value="Dhaka">Dhaka</option>
+                            <option value="Sylhet">Sylhet</option>
+                            <option value="Chittagong">Chittagong</option>
+                        </select>
+                        <div class="invalid-feedback"
+                            *ngIf="paymentForm.get('billingCity').hasError('required') && paymentForm.get('billingCity').touched">
+                            billing city required
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <select class="form-control" formControlName="billingState"
+                            [ngClass]="{'invalid-feedback' : paymentForm.get('billingState').errors && paymentForm.get('billingState').touched}"
+                            class="form-control">
+                            <option value="" disabled selected hidden>select billing city</option>
+                            <option value="Dhaka">Dhaka</option>
+                            <option value="Sylhet">Sylhet</option>
+                            <option value="Chittagong">Chittagong</option>
+                        </select>
+                        <div class="invalid-feedback"
+                            *ngIf="paymentForm.get('billingState').hasError('required') && paymentForm.get('billingState').touched">
+                            billing state required
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <select class="form-control" formControlName="billingCountry"
+                            [ngClass]="{'invalid-feedback' : paymentForm.get('billingCountry').errors && paymentForm.get('billingCountry').touched}"
+                            class="form-control">
+                            <option value="" disabled selected hidden>select billing country</option>
+                            <option value="Bangladesh">Bangladesh</option>
+                            <option value="USA">USA</option>
+                        </select>
+                        <div class="invalid-feedback"
+                            *ngIf="paymentForm.get('billingCountry').hasError('required') && paymentForm.get('billingCountry').touched">
+                            billing country required
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <input type="text"
+                            [ngClass]="{'invalid-feedback' : paymentForm.get('billingZipcode').errors && paymentForm.get('billingZipcode').touched}"
+                            class="form-control" formControlName="billingZipcode" placeholder="billing zipcode">
+
+                        <div class="invalid-feedback"
+                            *ngIf="paymentForm.get('billingZipcode').hasError('required') && paymentForm.get('billingZipcode').touched">
+                            billing zipcode required
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</form>
+
+            <div class="form-group">
+                <div class="row" style="margin-left: 3px;">
+                    <div class="col-sm-1">
+                        <a [routerLink]="['/my-profile/profile']" class="button-cancel btn btn-danger">Cancel</a>
+                    </div>
+                    <div class="col-sm-1">
+                        <button type="submit" [disabled]="!paymentForm.valid" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </mat-tab>
+</mat-tab-group>
+
+
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">
+    <p style="color: white">Please Wait. </p>
+</ngx-spinner>

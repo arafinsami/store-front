@@ -6,6 +6,7 @@ import { MyProfileComponent } from "./my-profile/my-profile.component";
 import { OrderComponent } from "./order/order.component";
 import { ShippingComponent } from "./shipping/shipping.component";
 import { ViewUserComponent } from "./view-user/view-user.component";
+import { PaymentUpdateComponent } from "./payment-update/payment-update.component";
 
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
     { path: 'edit-user', component: EditUserComponent },
     { path: 'order', component: OrderComponent },
     { path: 'payment', component: PaymentComponent },
+    { path: 'payment/update/:id', component: PaymentUpdateComponent },
     { path: 'shipping', component: ShippingComponent }
 ];
 
