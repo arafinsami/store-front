@@ -1,9 +1,9 @@
-
 <mat-tab-group mat-align-tabs="start" style="margin-bottom: 50px;">
     <mat-tab label="Payment List">
         <table class="table">
             <thead>
                 <tr>
+                    <th scope="col">Default payment</th>
                     <th scope="col">Card name</th>
                     <th scope="col">Card type</th>
                     <th scope="col">Action</th>
@@ -11,6 +11,12 @@
             </thead>
             <tbody>
                 <tr *ngFor="let dtos of paymentDtos">
+                    <td *ngIf="dtos.defaultPayment===true">
+                        <input type="radio" checked/> default payment
+                    </td>
+                    <td *ngIf="dtos.defaultPayment===false">
+                        <input type="radio"/> not default payment
+                    </td>
                     <td>{{dtos.cardName}}</td>
                     <td>{{dtos.type}}</td>
                     <td>
