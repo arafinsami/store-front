@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { ProfileDto } from 'src/app/dtos/profile.dto';
 import { Profile } from 'src/app/models/profile';
 import { MyProfileService } from 'src/app/service/my-profile.service';
@@ -19,7 +18,6 @@ export class ViewUserComponent implements OnInit {
   constructor(
     private myProfileService: MyProfileService,
     private toastar: ToastarService,
-    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit() {
@@ -27,11 +25,9 @@ export class ViewUserComponent implements OnInit {
   }
 
   getUserInfo() {
-    this.spinner.show();
     this.myProfileService.viewProfile(localStorage.getItem('username')).subscribe(response => {
       this.profile = response.data;
       this.dto = this.dto.from(this.profile);
-      this.spinner.hide();
     }, error => {
       this.toastar.error('profile not found !!!')
     });

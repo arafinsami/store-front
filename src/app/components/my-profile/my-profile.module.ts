@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatTabsModule } from "@angular/material/tabs";
@@ -14,10 +14,8 @@ import { MyProfileService } from "src/app/service/my-profile.service";
 import { PaymentComponent } from './payment/payment.component';
 import { MyAccountService } from "src/app/service/myaccount.service";
 import { httpInterceptorProviders } from "src/app/interceptor/auth-interceptor";
-import { NgxSpinnerModule } from "ngx-spinner";
 import { PaymentUpdateComponent } from './payment-update/payment-update.component';
 import { ShippingUpdateComponent } from './shipping-update/shipping-update.component';
-
 
 @NgModule({
     imports: [
@@ -26,8 +24,7 @@ import { ShippingUpdateComponent } from './shipping-update/shipping-update.compo
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
-        MatTabsModule,
-        NgxSpinnerModule
+        MatTabsModule
     ],
     declarations: [
         ViewUserComponent,

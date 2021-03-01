@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { ShippingDto } from 'src/app/dtos/shipping.dto';
 import { Shipping } from 'src/app/models/shipping';
 import { MyProfileService } from 'src/app/service/my-profile.service';
@@ -23,7 +22,6 @@ export class ShippingComponent implements OnInit {
     private myProfileService: MyProfileService,
     private fb: FormBuilder,
     private toastar: ToastarService,
-    private spinner: NgxSpinnerService,
     private route: Router
   ) { }
 
@@ -50,9 +48,7 @@ export class ShippingComponent implements OnInit {
       this.shipping = Object.assign({}, this.shippingForm.value);
       this.shippingDto = this.shippingDto.to(this.shipping);
       this.myProfileService.saveShipping(this.shippingDto).subscribe(response => {
-        this.spinner.show();
         this.toastar.success('shipping added successfully');
-        this.spinner.hide();
         this.shippingForm.reset();
         this.route.navigateByUrl('/my-profile/profile');
         console.log(response);
@@ -64,10 +60,8 @@ export class ShippingComponent implements OnInit {
   }
 
   viewShippingListByAppUser() {
-    this.spinner.show();
     this.myProfileService.viewShippingListByAppUser(localStorage.getItem('username')).subscribe(response => {
       this.shippingDtos = response.data;
-      this.spinner.hide();
     }, error => {
       this.toastar.error('shipping list not found !!!')
     });

@@ -14,7 +14,8 @@ export class NavBarComponent implements OnInit {
     public myAccountService: MyAccountService,
     private toastar: ToastarService,
     private route: Router
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
   }

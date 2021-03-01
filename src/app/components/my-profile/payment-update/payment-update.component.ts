@@ -23,7 +23,6 @@ export class PaymentUpdateComponent implements OnInit {
     private myProfileService: MyProfileService,
     private fb: FormBuilder,
     private toastar: ToastarService,
-    private spinner: NgxSpinnerService,
     private activatedRoute: ActivatedRoute,
     private route: Router
   ) { }
@@ -62,9 +61,7 @@ export class PaymentUpdateComponent implements OnInit {
       this.payment = Object.assign({}, this.paymentForm.value);
       this.paymentDto = this.paymentDto.from(this.payment);
       this.myProfileService.updatePayment(this.paymentDto).subscribe(response => {
-        this.spinner.show();
         this.toastar.success('payment updated successfully');
-        this.spinner.hide();
         this.paymentForm.reset();
         this.route.navigateByUrl('/my-profile/profile');
         console.log(response);

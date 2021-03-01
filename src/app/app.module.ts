@@ -11,8 +11,6 @@ import { appRoutes } from './routes';
 import 'hammerjs';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { ToastrModule } from 'ngx-toastr';
-import { NgxSpinnerModule } from 'ngx-spinner';
-
 
 @NgModule({
   declarations: [

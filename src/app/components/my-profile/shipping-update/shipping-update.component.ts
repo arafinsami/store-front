@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { ShippingDto } from 'src/app/dtos/shipping.dto';
 import { Shipping } from 'src/app/models/shipping';
 import { MyProfileService } from 'src/app/service/my-profile.service';
@@ -23,7 +22,6 @@ export class ShippingUpdateComponent implements OnInit {
     private myProfileService: MyProfileService,
     private fb: FormBuilder,
     private toastar: ToastarService,
-    private spinner: NgxSpinnerService,
     private activatedRoute: ActivatedRoute,
     private route: Router
   ) { }
@@ -51,10 +49,8 @@ export class ShippingUpdateComponent implements OnInit {
     if (this.shippingForm.valid) {
       this.shipping = Object.assign({}, this.shippingForm.value);
       this.shippingDto = this.shippingDto.from(this.shipping);
-      this.spinner.show();
       this.myProfileService.updateShipping(this.shippingDto).subscribe(response => {
         this.toastar.success('shipping updated successfully');
-        this.spinner.hide();
         this.shippingForm.reset();
         this.route.navigateByUrl('/my-profile/profile');
         console.log(response);
@@ -66,11 +62,9 @@ export class ShippingUpdateComponent implements OnInit {
   }
 
   getById() {
-    this.spinner.show();
     this.shippingId = this.activatedRoute.snapshot.paramMap.get('id');
     this.myProfileService.findByShippingId(this.shippingId).subscribe(response => {
       this.shipping = response.data;
-      this.spinner.hide();
       this.shippingForm.reset(this.shippingDto.from(this.shipping));
     }, error => {
       this.toastar.error(error);

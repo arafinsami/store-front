@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { ProfileDto } from 'src/app/dtos/profile.dto';
 import { Profile } from 'src/app/models/profile';
 import { MyProfileService } from 'src/app/service/my-profile.service';
@@ -26,7 +25,6 @@ export class EditUserComponent implements OnInit {
     private myAccountService: MyAccountService,
     private fb: FormBuilder,
     private toastar: ToastarService,
-    private spinner: NgxSpinnerService,
     private route: Router
   ) { }
 
@@ -49,11 +47,9 @@ export class EditUserComponent implements OnInit {
 
   getUserInfo() {
     this.myProfileService.viewProfile(this.myAccountService.getLogggedInUser()).subscribe(response => {
-      this.spinner.show();
       this.profile = response.data;
       this.dto = this.dto.from(this.profile);
       this.editProfileForm.reset(this.dto);
-      this.spinner.hide();
     }, error => {
       this.toastar.error('data not found !!!')
     });
@@ -64,9 +60,7 @@ export class EditUserComponent implements OnInit {
       this.profile = Object.assign({}, this.editProfileForm.value);
       this.dto = this.dto.from(this.profile);
       this.myProfileService.updateProfile(this.dto).subscribe(response => {
-        this.spinner.show();
         this.toastar.success('profile editd successfully');
-        this.spinner.hide();
         this.route.navigateByUrl('/my-profile/profile');
         console.log(response);
       }, error => {

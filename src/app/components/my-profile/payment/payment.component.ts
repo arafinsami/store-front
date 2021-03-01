@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { PaymentDto } from 'src/app/dtos/payment.dto';
 import { Payment } from 'src/app/models/payment';
 import { MyProfileService } from 'src/app/service/my-profile.service';
@@ -24,7 +23,6 @@ export class PaymentComponent implements OnInit {
     private myProfileService: MyProfileService,
     private fb: FormBuilder,
     private toastar: ToastarService,
-    private spinner: NgxSpinnerService,
     private route: Router
   ) { }
 
@@ -59,10 +57,8 @@ export class PaymentComponent implements OnInit {
     if (this.paymentForm.valid) {
       this.payment = Object.assign({}, this.paymentForm.value);
       this.paymentDto = this.paymentDto.to(this.payment);
-      this.spinner.show();
       this.myProfileService.savePayment(this.paymentDto).subscribe(response => {
         this.toastar.success('payment added successfully');
-        this.spinner.hide();
         this.paymentForm.reset();
         this.route.navigateByUrl('/my-profile/profile');
         console.log(response);
@@ -74,10 +70,8 @@ export class PaymentComponent implements OnInit {
   }
 
   viewPaymentListByAppUser() {
-    this.spinner.show();
     this.myProfileService.viewPaymentListByAppUser(localStorage.getItem('username')).subscribe(response => {
       this.paymentDtos = response.data;
-      this.spinner.hide();
     }, error => {
       this.toastar.error('payment list not found !!!')
     });
