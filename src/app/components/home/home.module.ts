@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeRoutingModule } from './home.routing';
 import { HomeComponent } from './home/home.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { BookService } from 'src/app/service/book.service';
 
 @NgModule({
     imports: [
@@ -13,6 +14,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
         NgxSpinnerModule
     ],
     declarations: [HomeComponent],
-    providers: []
+    providers: [
+        BookService
+    ]
 })
 export class HomeModule { }

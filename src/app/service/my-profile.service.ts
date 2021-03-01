@@ -11,27 +11,27 @@ export class MyProfileService {
 
     constructor(private http: HttpClient) { }
 
-    public viewProfile(username: string): Observable<any> {
+    viewProfile(username: string): Observable<any> {
         return this.http.get(environment.BASE_URL + 'my-profile/view-profile/' + username);
     }
 
-    public updateProfile(dto: ProfileDto): Observable<any> {
+    updateProfile(dto: ProfileDto): Observable<any> {
         return this.http.post(environment.BASE_URL + 'my-profile/update', dto);
     }
 
-    public savePayment(dto: PaymentDto): Observable<any> {
+    savePayment(dto: PaymentDto): Observable<any> {
         return this.http.post(environment.BASE_URL + 'my-profile/save/payment', dto);
     }
 
-    public updatePayment(dto: PaymentDto): Observable<any> {
+    updatePayment(dto: PaymentDto): Observable<any> {
         return this.http.put(environment.BASE_URL + 'my-profile/update/payment', dto);
     }
 
-    public findByPaymentId(paymentId: Number): Observable<any> {
+    findByPaymentId(paymentId: Number): Observable<any> {
         return this.http.get(environment.BASE_URL + 'my-profile/view/payment/' + paymentId);
     }
 
-    public viewPaymentListByAppUser(username: string): Observable<any> {
+    viewPaymentListByAppUser(username: string): Observable<any> {
         return this.http.get(environment.BASE_URL + 'my-profile/view/payments/' + username);
     }
 

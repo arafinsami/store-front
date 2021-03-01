@@ -7,10 +7,6 @@ export const appRoutes: Routes = [
         loadChildren: () => import('./components/home/home.module').then(m => m.HomeModule)
     },
     {
-        path: 'book',
-        loadChildren: () => import('./components/book/book.module').then(m => m.BookModule)
-    },
-    {
         path: 'my-account',
         loadChildren: () => import('./components/my-account/my-account.module').then(m => m.MyAccountModule)
     },
