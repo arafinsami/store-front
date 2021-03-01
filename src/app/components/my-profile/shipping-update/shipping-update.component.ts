@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ShippingDto } from 'src/app/dtos/shipping.dto';
 import { Shipping } from 'src/app/models/shipping';
@@ -8,32 +8,34 @@ import { MyProfileService } from 'src/app/service/my-profile.service';
 import { ToastarService } from 'src/app/service/toastar.service';
 
 @Component({
-  selector: 'app-shipping',
-  templateUrl: './shipping.component.html',
-  styleUrls: ['./shipping.component.css']
+  selector: 'app-shipping-update',
+  templateUrl: './shipping-update.component.html',
+  styleUrls: ['./shipping-update.component.css']
 })
-export class ShippingComponent implements OnInit {
+export class ShippingUpdateComponent implements OnInit {
 
   shipping: Shipping;
   shippingDto: ShippingDto = new ShippingDto();
-  shippingDtos: ShippingDto[];
   shippingForm: FormGroup;
+  shippingId: any;
 
   constructor(
     private myProfileService: MyProfileService,
     private fb: FormBuilder,
     private toastar: ToastarService,
     private spinner: NgxSpinnerService,
+    private activatedRoute: ActivatedRoute,
     private route: Router
   ) { }
 
   ngOnInit(): void {
     this.formInit();
-    this.viewShippingListByAppUser();
+    this.getById();
   }
 
   formInit() {
     this.shippingForm = this.fb.group({
+      id: [''],
       shippingName: [''],
       defaultshipping: ['true'],
       shippingStreet1: [''],
@@ -48,28 +50,30 @@ export class ShippingComponent implements OnInit {
   onSubmit() {
     if (this.shippingForm.valid) {
       this.shipping = Object.assign({}, this.shippingForm.value);
-      this.shippingDto = this.shippingDto.to(this.shipping);
-      this.myProfileService.saveShipping(this.shippingDto).subscribe(response => {
-        this.spinner.show();
-        this.toastar.success('shipping added successfully');
+      this.shippingDto = this.shippingDto.from(this.shipping);
+      this.spinner.show();
+      this.myProfileService.updateShipping(this.shippingDto).subscribe(response => {
+        this.toastar.success('shipping updated successfully');
         this.spinner.hide();
         this.shippingForm.reset();
         this.route.navigateByUrl('/my-profile/profile');
         console.log(response);
       }, error => {
-        this.toastar.error('shipping addition failed');
+        this.toastar.error('shipping updating failed');
         console.log(error)
       });
     }
   }
 
-  viewShippingListByAppUser() {
+  getById() {
     this.spinner.show();
-    this.myProfileService.viewShippingListByAppUser(localStorage.getItem('username')).subscribe(response => {
-      this.shippingDtos = response.data;
+    this.shippingId = this.activatedRoute.snapshot.paramMap.get('id');
+    this.myProfileService.findByShippingId(this.shippingId).subscribe(response => {
+      this.shipping = response.data;
       this.spinner.hide();
+      this.shippingForm.reset(this.shippingDto.from(this.shipping));
     }, error => {
-      this.toastar.error('shipping list not found !!!')
+      this.toastar.error(error);
     });
   }
 

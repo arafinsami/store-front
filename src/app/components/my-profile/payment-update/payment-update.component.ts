@@ -16,11 +16,8 @@ export class PaymentUpdateComponent implements OnInit {
 
   payment: Payment;
   paymentDto: PaymentDto = new PaymentDto();
-  paymentDtos: PaymentDto[];
-  payments: Payment[];
   paymentForm: FormGroup;
   paymentId: any;
-
 
   constructor(
     private myProfileService: MyProfileService,

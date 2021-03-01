@@ -12,10 +12,10 @@
             <tbody>
                 <tr *ngFor="let dtos of paymentDtos">
                     <td *ngIf="dtos.defaultPayment===true">
-                        <input type="radio" checked/> default payment
+                        <input type="radio" checked/> default
                     </td>
                     <td *ngIf="dtos.defaultPayment===false">
-                        <input type="radio"/> not default payment
+                        <input type="radio"/> default
                     </td>
                     <td>{{dtos.cardName}}</td>
                     <td>{{dtos.type}}</td>
@@ -204,7 +204,7 @@
                     </div>
                     <div class="col-sm-3" formGroupName="billing">
                         <select class="form-control" formControlName="billingState" class="form-control">
-                            <option value="" disabled selected hidden>select billing city</option>
+                            <option value="" disabled selected hidden>select billing state</option>
                             <option value="Dhaka">Dhaka</option>
                             <option value="Sylhet">Sylhet</option>
                             <option value="Chittagong">Chittagong</option>

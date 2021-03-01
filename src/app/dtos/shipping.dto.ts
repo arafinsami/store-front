@@ -6,6 +6,8 @@ export class ShippingDto {
 
     shippingName: string;
 
+    defaultshipping: boolean;
+
     shippingStreet1: string;
 
     shippingStreet2: string;
@@ -21,8 +23,23 @@ export class ShippingDto {
     public to(shipping: Shipping): ShippingDto {
 
         let dto: ShippingDto = new ShippingDto();
+        dto.shippingName = shipping.shippingName;
+        dto.defaultshipping = shipping.defaultshipping;
+        dto.shippingStreet1 = shipping.shippingStreet1;
+        dto.shippingStreet2 = shipping.shippingStreet2;
+        dto.shippingCity = shipping.shippingCity;
+        dto.shippingState = shipping.shippingState;
+        dto.shippingCountry = shipping.shippingCountry;
+        dto.shippingZipcode = shipping.shippingZipcode;
+        return dto;
+    }
+
+    public from(shipping: Shipping): ShippingDto {
+
+        let dto: ShippingDto = new ShippingDto();
         dto.id = shipping.id;
         dto.shippingName = shipping.shippingName;
+        dto.defaultshipping = shipping.defaultshipping;
         dto.shippingStreet1 = shipping.shippingStreet1;
         dto.shippingStreet2 = shipping.shippingStreet2;
         dto.shippingCity = shipping.shippingCity;

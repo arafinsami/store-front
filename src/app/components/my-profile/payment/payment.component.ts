@@ -18,10 +18,7 @@ export class PaymentComponent implements OnInit {
   payment: Payment;
   paymentDto: PaymentDto = new PaymentDto();
   paymentDtos: PaymentDto[];
-  payments: Payment[];
   paymentForm: FormGroup;
-  selectedBillingTab = 0;
-
 
   constructor(
     private myProfileService: MyProfileService,
@@ -33,7 +30,7 @@ export class PaymentComponent implements OnInit {
 
   ngOnInit(): void {
     this.formInit();
-    this.viewPaymentsByAppUser();
+    this.viewPaymentListByAppUser();
   }
 
   formInit() {
@@ -62,8 +59,8 @@ export class PaymentComponent implements OnInit {
     if (this.paymentForm.valid) {
       this.payment = Object.assign({}, this.paymentForm.value);
       this.paymentDto = this.paymentDto.to(this.payment);
-      this.myProfileService.newPayment(this.paymentDto).subscribe(response => {
-        this.spinner.show();
+      this.spinner.show();
+      this.myProfileService.savePayment(this.paymentDto).subscribe(response => {
         this.toastar.success('payment added successfully');
         this.spinner.hide();
         this.paymentForm.reset();
@@ -76,9 +73,9 @@ export class PaymentComponent implements OnInit {
     }
   }
 
-  viewPaymentsByAppUser() {
+  viewPaymentListByAppUser() {
     this.spinner.show();
-    this.myProfileService.viewPaymentsByAppUser(localStorage.getItem('username')).subscribe(response => {
+    this.myProfileService.viewPaymentListByAppUser(localStorage.getItem('username')).subscribe(response => {
       this.paymentDtos = response.data;
       this.spinner.hide();
     }, error => {

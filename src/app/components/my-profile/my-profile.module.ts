@@ -16,6 +16,7 @@ import { MyAccountService } from "src/app/service/myaccount.service";
 import { httpInterceptorProviders } from "src/app/interceptor/auth-interceptor";
 import { NgxSpinnerModule } from "ngx-spinner";
 import { PaymentUpdateComponent } from './payment-update/payment-update.component';
+import { ShippingUpdateComponent } from './shipping-update/shipping-update.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { PaymentUpdateComponent } from './payment-update/payment-update.componen
         ShippingComponent,
         MyProfileComponent,
         PaymentComponent,
-        PaymentUpdateComponent
+        PaymentUpdateComponent,
+        ShippingUpdateComponent
     ],
     providers: [
         MyProfileService,

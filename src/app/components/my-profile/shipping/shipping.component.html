@@ -1,1 +1,148 @@
-<p>shipping works!</p>
+<mat-tab-group mat-align-tabs="start" style="margin-bottom: 50px;">
+    <mat-tab label="Shipping List">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Default shipping</th>
+                    <th scope="col">Shipping address</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let dtos of shippingDtos">
+                    <td *ngIf="dtos.defaultshipping===true">
+                        <input type="radio" checked/>default
+                    </td>
+                    <td *ngIf="dtos.defaultshipping===false">
+                        <input type="radio"/>default
+                    </td>
+                    <td>{{dtos.shippingStreet1}}</td>
+                    <td>
+                        <a [routerLink]="['/my-profile/shipping/update', dtos.id]">Update</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </mat-tab>
+    <mat-tab label="New Shipping">
+        <form class="form-horizontal" [formGroup]="shippingForm" (ngSubmit)="onSubmit()" style="margin-top: 20px;">
+
+            <div class="form-group">
+                <div class="row" style="margin-left: 3px;margin-right: 3px;">
+                    <div class="col-sm-6">
+                        <input type="text"
+                            [ngClass]="{'invalid-feedback' : shippingForm.get('shippingName').errors && shippingForm.get('shippingName').touched}"
+                            class="form-control" formControlName="shippingName" placeholder="shipping name">
+
+                        <div class="invalid-feedback"
+                            *ngIf="shippingForm.get('shippingName').hasError('required') && shippingForm.get('shippingName').touched">
+                            shipping name required
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="text"
+                            [ngClass]="{'invalid-feedback' : shippingForm.get('shippingZipcode').errors && shippingForm.get('shippingZipcode').touched}"
+                            class="form-control" formControlName="shippingZipcode" placeholder="shipping zipcode">
+
+                        <div class="invalid-feedback"
+                            *ngIf="shippingForm.get('shippingZipcode').hasError('required') && shippingForm.get('shippingZipcode').touched">
+                            shipping zipcode required
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row" style="margin-left: 3px;margin-right: 3px;">
+                    <div class="col-sm-6">
+                        <textarea rows="4"
+                            [ngClass]="{'invalid-feedback' : shippingForm.get('shippingStreet1').errors && shippingForm.get('shippingStreet1').touched}"
+                            class="form-control" formControlName="shippingStreet1"
+                            placeholder="shipping street 1"></textarea>
+
+                        <div class="invalid-feedback"
+                            *ngIf="shippingForm.get('shippingStreet1').hasError('required') && shippingForm.get('shippingStreet1').touched">
+                            shipping street 1 number required
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <textarea rows="4"
+                            [ngClass]="{'invalid-feedback' : shippingForm.get('shippingStreet2').errors && shippingForm.get('shippingStreet2').touched}"
+                            class="form-control" formControlName="shippingStreet2"
+                            placeholder="shipping street 2"></textarea>
+
+                        <div class="invalid-feedback"
+                            *ngIf="shippingForm.get('shippingStreet2').hasError('required') && shippingForm.get('shippingStreet2').touched">
+                            shipping street 2 number required
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row" style="margin-left: 3px;margin-right: 3px;">
+                    <div class="col-sm-4">
+                        <select class="form-control" formControlName="shippingCity"
+                            [ngClass]="{'invalid-feedback' : shippingForm.get('shippingCity').errors && shippingForm.get('shippingCity').touched}"
+                            class="form-control">
+                            <option value="" disabled selected hidden>select shipping city</option>
+                            <option value="Dhaka">Dhaka</option>
+                            <option value="Sylhet">Sylhet</option>
+                            <option value="Chittagong">Chittagong</option>
+                        </select>
+                        <div class="invalid-feedback"
+                            *ngIf="shippingForm.get('shippingCity').hasError('required') && shippingForm.get('shippingCity').touched">
+                            shipping city required
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <select class="form-control" formControlName="shippingState"
+                            [ngClass]="{'invalid-feedback' : shippingForm.get('shippingState').errors && shippingForm.get('shippingState').touched}"
+                            class="form-control">
+                            <option value="" disabled selected hidden>select shipping state</option>
+                            <option value="Dhaka">Dhaka</option>
+                            <option value="Sylhet">Sylhet</option>
+                            <option value="Chittagong">Chittagong</option>
+                        </select>
+                        <div class="invalid-feedback"
+                            *ngIf="shippingForm.get('shippingState').hasError('required') && shippingForm.get('shippingState').touched">
+                            shipping state required
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <select class="form-control" formControlName="shippingCountry"
+                            [ngClass]="{'invalid-feedback' : shippingForm.get('shippingCountry').errors && shippingForm.get('shippingCountry').touched}"
+                            class="form-control">
+                            <option value="" disabled selected hidden>select shipping country</option>
+                            <option value="Bangladesh">Bangladesh</option>
+                            <option value="USA">USA</option>
+                        </select>
+                        <div class="invalid-feedback"
+                            *ngIf="shippingForm.get('shippingCountry').hasError('required') && shippingForm.get('shippingCountry').touched">
+                            shipping country required
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row" style="margin-left: 3px;">
+                    <div class="col-sm-1">
+                        <a [routerLink]="['/my-profile/profile']" class="button-cancel btn btn-danger">Cancel</a>
+                    </div>
+                    <div class="col-sm-1">
+                        <button type="submit" [disabled]="!shippingForm.valid" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </mat-tab>
+</mat-tab-group>
+
+
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">
+    <p style="color: white">Please Wait. </p>
+</ngx-spinner>

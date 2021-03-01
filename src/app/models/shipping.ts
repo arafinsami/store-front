@@ -4,6 +4,8 @@ export class Shipping {
 
     shippingName: string;
 
+    defaultshipping: boolean;
+
     shippingStreet1: string;
 
     shippingStreet2: string;
