@@ -1,0 +1,175 @@
+* {
+  /* margin: 0;
+  padding: 0; */
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  background-color: #f0f0f0;
+  position: absolute;
+}
+
+.wrapper {
+  padding: 50px 0px 0px 120px;
+  display: flex;
+  column-gap: 24px;
+  min-height: 85vh;
+  min-width: 90%;
+}
+
+.sidebar {
+  flex-basis: 25%;
+  box-shadow: 0 0 4px 0 rgb(0 0 0 / 8%), 0 2px 4px 0 rgb(0 0 0 / 12%);
+  border-radius: 0;
+  background: #fff;
+  overflow: hidden;
+}
+
+.content {
+  flex-basis: 75%;
+  box-shadow: 0 0 4px 0 rgb(0 0 0 / 8%), 0 2px 4px 0 rgb(0 0 0 / 12%);
+  border-radius: 0;
+  background: #fff;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+#searchbar {
+  display: flex;
+  align-items: center;
+  column-gap: 24px;
+  border-bottom: 1px solid #bec0c2;
+  /*   margin: 20px 0px; */
+  padding: 20px 10px 5px 10px;
+}
+
+#search-field {
+  margin-left: 10px;
+  flex-basis: 40%;
+}
+
+#result-output {
+}
+#select-item {
+  margin-right: 10px;
+}
+
+.clerfix {
+  flex: 1;
+}
+
+::ng-deep .mat-form-field-flex > .mat-form-field-infix {
+  padding: 0.4em 0px !important;
+}
+::ng-deep .mat-form-field-label-wrapper {
+  top: -1.5em;
+}
+
+::ng-deep
+  .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float
+  .mat-form-field-label {
+  transform: translateY(-1.1em) scale(0.75);
+  width: 133.33333%;
+}
+
+.result {
+  display: flex;
+  padding: 24px;
+  column-gap: 10px;
+  border-bottom: 1px solid #dedede;
+  /*   border-left: 4px solid #3f51b500; */
+  transition: 0.2s;
+}
+
+.result:hover {
+  /*   border-left: 4px solid #3f51b5; */
+  box-shadow: 0 0 4px 0 rgb(0 0 0 / 8%), 0 2px 4px 0 rgb(0 0 0 / 12%);
+}
+
+.job-title {
+  margin-bottom: 2px;
+}
+
+.result-left {
+  margin-top: 5px;
+}
+
+.job-description {
+  color: #8c8c8c;
+  font-size: 14px;
+  line-height: 1.4;
+}
+.estimated-price {
+  font-size: 1.5rem;
+  line-height: 1.33;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+li {
+  position: relative;
+}
+
+.left-anim-bar {
+  position: absolute;
+  height: 100%;
+  width: 0px;
+  background: #3f51b5;
+  transition: 0.1s;
+}
+
+li:hover .left-anim-bar {
+  width: 5px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.pagination input {
+  width: 80px;
+  margin-right: 5px;
+}
+
+.pagination button {
+  margin: 0;
+  padding: 5;
+  border-radius: 5px;
+  background-color: #3f51b5;
+  color: #fff;
+}
+
+.sidebar {
+  padding: 20px 20px;
+}
+
+.sidebar p {
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+.sidebar span {
+  display: flex;
+  column-gap: 10px;
+  margin-top: 15px;
+}
+
+.sidebar span input {
+  width: 120px;
+}
+.example-chip-list {
+  width: 100%;
+}

@@ -1,0 +1,278 @@
+<div class="container">
+  <div class="wrapper">
+    <div class="sidebar">
+      <p>Price Range</p>
+      <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options"></ngx-slider>
+      <span> <input type="text" /><input type="text" /></span>
+      <hr>
+      <p>Skills</p>
+      <mat-form-field class="example-chip-list">
+        <mat-label>Select skills</mat-label>
+        <mat-chip-list #chipList aria-label="Fruit selection">
+          <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable" [removable]="removable"
+            (removed)="remove(fruit)">
+            {{fruit}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input placeholder="New fruit..." #fruitInput [formControl]="fruitCtrl" [matAutocomplete]="auto"
+            [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            (matChipInputTokenEnd)="add($event)">
+        </mat-chip-list>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+          <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
+            {{fruit}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <hr>
+    </div>
+    <div class="content">
+      <div id="searchbar">
+        <mat-form-field appearance="outline" id="search-field">
+          <mat-label>search</mat-label>
+          <input matInput type="search" placeholder="Type search keyword">
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+        <p id="result-output">949 Results </p>
+        <span class="clerfix"></span>
+        <p id="select-item">
+          <label for="cars">Short By : </label>
+          <select name="cars">
+            <option value="one">item 1</option>
+            <option value="two">item 2</option>
+            <option value="three">item 3</option>
+            <option value="four">item 4</option>
+          </select>
+        </p>
+      </div>
+      <ul>
+        <li>
+          <span class="left-anim-bar"></span>
+          <div class="result">
+            <div class="result-left">
+              <svg class="Icon-image" width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path
+                  d="M0 15.5v1c0 1.103.897 2 2 2h9v2H7v2h10v-2h-4v-2h9c1.103 0 2-.897 2-2v-1H0zm24-1v-11c0-1.103-.897-2-2-2H2c-1.103 0-2 .897-2 2v11h24z"
+                  fill="#0087E0"></path>
+              </svg>
+            </div>
+            <div class="result-middle">
+              <h2 class="job-title">Java Production support with experience in Banking client </h2>
+              <p class="job-description">Job Description:
+                The key aspects of this role include:
+                Troubleshoot failures and determine best course of action
+                File processing to include verifying data quality and identification and communication of file variances
+                and
+                potential
+                issues
+                Monitor and verify program execution and identification and communication of processing variances (e.g.
+                run
+                time, record
+                counts
+              </p>
+              <div>
+
+              </div>
+            </div>
+            <div class="result-right">
+              <p class="estimated-price">$10-$20</p>
+            </div>
+          </div>
+        </li>
+
+        <li>
+          <span class="left-anim-bar"></span>
+          <div class="result">
+            <div class="result-left">
+              <svg class="Icon-image" width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path
+                  d="M0 15.5v1c0 1.103.897 2 2 2h9v2H7v2h10v-2h-4v-2h9c1.103 0 2-.897 2-2v-1H0zm24-1v-11c0-1.103-.897-2-2-2H2c-1.103 0-2 .897-2 2v11h24z"
+                  fill="#0087E0"></path>
+              </svg>
+            </div>
+            <div class="result-middle">
+              <h2 class="job-title">Java Production support with experience in Banking client </h2>
+              <p class="job-description">Job Description:
+                The key aspects of this role include:
+                Troubleshoot failures and determine best course of action
+                File processing to include verifying data quality and identification and communication of file variances
+                and
+                potential
+                issues
+                Monitor and verify program execution and identification and communication of processing variances (e.g.
+                run
+                time, record
+                counts
+              </p>
+              <div>
+
+              </div>
+            </div>
+            <div class="result-right">
+              <p class="estimated-price">$10-$20</p>
+            </div>
+          </div>
+        </li>
+        <li>
+          <span class="left-anim-bar"></span>
+          <div class="result">
+            <div class="result-left">
+              <svg class="Icon-image" width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path
+                  d="M0 15.5v1c0 1.103.897 2 2 2h9v2H7v2h10v-2h-4v-2h9c1.103 0 2-.897 2-2v-1H0zm24-1v-11c0-1.103-.897-2-2-2H2c-1.103 0-2 .897-2 2v11h24z"
+                  fill="#0087E0"></path>
+              </svg>
+            </div>
+            <div class="result-middle">
+              <h2 class="job-title">Java Production support with experience in Banking client </h2>
+              <p class="job-description">Job Description:
+                The key aspects of this role include:
+                Troubleshoot failures and determine best course of action
+                File processing to include verifying data quality and identification and communication of file variances
+                and
+                potential
+                issues
+                Monitor and verify program execution and identification and communication of processing variances (e.g.
+                run
+                time, record
+                counts
+              </p>
+              <div>
+
+              </div>
+            </div>
+            <div class="result-right">
+              <p class="estimated-price">$10-$20</p>
+            </div>
+          </div>
+        </li>
+        <li>
+          <span class="left-anim-bar"></span>
+          <div class="result">
+            <div class="result-left">
+              <svg class="Icon-image" width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path
+                  d="M0 15.5v1c0 1.103.897 2 2 2h9v2H7v2h10v-2h-4v-2h9c1.103 0 2-.897 2-2v-1H0zm24-1v-11c0-1.103-.897-2-2-2H2c-1.103 0-2 .897-2 2v11h24z"
+                  fill="#0087E0"></path>
+              </svg>
+            </div>
+            <div class="result-middle">
+              <h2 class="job-title">Java Production support with experience in Banking client </h2>
+              <p class="job-description">Job Description:
+                The key aspects of this role include:
+                Troubleshoot failures and determine best course of action
+                File processing to include verifying data quality and identification and communication of file variances
+                and
+                potential
+                issues
+                Monitor and verify program execution and identification and communication of processing variances (e.g.
+                run
+                time, record
+                counts
+              </p>
+              <div>
+
+              </div>
+            </div>
+            <div class="result-right">
+              <p class="estimated-price">$10-$20</p>
+            </div>
+          </div>
+        </li>
+        <li>
+          <span class="left-anim-bar"></span>
+          <div class="result">
+            <div class="result-left">
+              <svg class="Icon-image" width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path
+                  d="M0 15.5v1c0 1.103.897 2 2 2h9v2H7v2h10v-2h-4v-2h9c1.103 0 2-.897 2-2v-1H0zm24-1v-11c0-1.103-.897-2-2-2H2c-1.103 0-2 .897-2 2v11h24z"
+                  fill="#0087E0"></path>
+              </svg>
+            </div>
+            <div class="result-middle">
+              <h2 class="job-title">Java Production support with experience in Banking client </h2>
+              <p class="job-description">Job Description:
+                The key aspects of this role include:
+                Troubleshoot failures and determine best course of action
+                File processing to include verifying data quality and identification and communication of file variances
+                and
+                potential
+                issues
+                Monitor and verify program execution and identification and communication of processing variances (e.g.
+                run
+                time, record
+                counts
+              </p>
+              <div>
+
+              </div>
+            </div>
+            <div class="result-right">
+              <p class="estimated-price">$10-$20</p>
+            </div>
+          </div>
+        </li>
+        <li>
+          <span class="left-anim-bar"></span>
+          <div class="result">
+            <div class="result-left">
+              <svg class="Icon-image" width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path
+                  d="M0 15.5v1c0 1.103.897 2 2 2h9v2H7v2h10v-2h-4v-2h9c1.103 0 2-.897 2-2v-1H0zm24-1v-11c0-1.103-.897-2-2-2H2c-1.103 0-2 .897-2 2v11h24z"
+                  fill="#0087E0"></path>
+              </svg>
+            </div>
+            <div class="result-middle">
+              <h2 class="job-title">Java Production support with experience in Banking client </h2>
+              <p class="job-description">Job Description:
+                The key aspects of this role include:
+                Troubleshoot failures and determine best course of action
+                File processing to include verifying data quality and identification and communication of file variances
+                and
+                potential
+                issues
+                Monitor and verify program execution and identification and communication of processing variances (e.g.
+                run
+                time, record
+                counts
+              </p>
+              <div>
+
+              </div>
+            </div>
+            <div class="result-right">
+              <p class="estimated-price">$10-$20</p>
+            </div>
+          </div>
+        </li>
+
+      </ul>
+      <div class="pagination">
+        <span><input type="text" placeholder="page 0"> <button>Go</button></span>
+        <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+        </mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <svg class="Icon-image" width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <g fill="none">
+            <path
+              d="M20.5 3.805V1.2c0-.662-.536-1.2-1.196-1.2H4.946C4.286 0 3.75.538 3.75 1.2v2.606c0 .948.383 1.876 1.052 2.546L10.433 12l-5.631 5.65a3.577 3.577 0 0 0-1.052 2.545V22.8c0 .662.536 1.2 1.196 1.2h14.358c.66 0 1.196-.538 1.196-1.2v-2.605a3.58 3.58 0 0 0-1.052-2.547L13.817 12l5.631-5.648A3.63 3.63 0 0 0 20.5 3.805z"
+              fill="#363F4D"></path>
+            <path fill="#FFF" d="M8.536 20.4l3.589-3.6 3.59 3.6z"></path>
+          </g>
+        </svg>
+
+        <svg class="Icon-image" width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path
+            d="M23.648 13.551l-13.2-13.2A1.197 1.197 0 0 0 9.6 0H1.2C.536 0 0 .536 0 1.2v8.4c0 .32.126.623.352.848l13.2 13.2a1.197 1.197 0 0 0 1.696 0l8.4-8.4c.47-.469.47-1.227 0-1.697zM6 8.4a2.4 2.4 0 1 1-.001-4.8 2.4 2.4 0 0 1 0 4.799z"
+            fill="#363F4D"></path>
+        </svg>
+
+        <svg class="Icon-image" width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path
+            d="M12.125 13.5C5.87 13.5 1.5 17.2 1.5 22.5V24h21.25v-1.5c0-5.3-4.368-9-10.625-9zm0-2.833c2.93 0 5.313-2.394 5.313-5.334 0-2.94-2.383-5.333-5.313-5.333-2.93 0-5.313 2.393-5.313 5.333 0 2.94 2.384 5.334 5.313 5.334z"
+            fill="#363F4D"></path>
+        </svg> -->
