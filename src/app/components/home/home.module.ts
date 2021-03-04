@@ -4,6 +4,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeRoutingModule } from './home.routing';
 import { HomeComponent } from './home/home.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { FrelancerComponent } from './frelancer/frelancer.component';
+import { MaterialModule } from 'src/app/materials/material';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BookService } from 'src/app/service/book.service';
 
 @NgModule({
@@ -11,9 +15,13 @@ import { BookService } from 'src/app/service/book.service';
         CommonModule,
         HomeRoutingModule,
         HttpClientModule,
-        NgxSpinnerModule
+        NgxSpinnerModule,
+        MaterialModule,
+        NgxSliderModule,
+        FormsModule,
+        ReactiveFormsModule,
     ],
-    declarations: [HomeComponent],
+    declarations: [HomeComponent, FrelancerComponent],
     providers: [
         BookService
     ]
