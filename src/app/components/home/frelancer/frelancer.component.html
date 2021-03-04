@@ -5,9 +5,9 @@
       <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options"></ngx-slider>
       <span> <input type="text" /><input type="text" /></span>
       <hr>
-      <p>Skills</p>
+      <p>Tags</p>
       <mat-form-field class="example-chip-list">
-        <mat-label>Select skills</mat-label>
+        <mat-label>Select tags</mat-label>
         <mat-chip-list #chipList aria-label="Fruit selection">
           <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable" [removable]="removable"
             (removed)="remove(fruit)">
