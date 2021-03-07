@@ -9,7 +9,7 @@ export class BookService {
 
     constructor(private http: HttpClient) { }
 
-    getBookList(): Observable<any> {
-        return this.http.get(environment.BASE_URL + 'book/book/book-list');
+    getBookList(params: FormData): Observable<any> {
+        return this.http.post(environment.BASE_URL + 'book-search/data', params);
     }
 }

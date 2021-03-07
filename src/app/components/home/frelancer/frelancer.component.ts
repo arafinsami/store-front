@@ -14,6 +14,7 @@ import { map, startWith } from 'rxjs/operators';
   styleUrls: ['./frelancer.component.css']
 })
 export class FrelancerComponent implements OnInit {
+  
   minValue: number = 100;
   maxValue: number = 500;
   options: Options = {

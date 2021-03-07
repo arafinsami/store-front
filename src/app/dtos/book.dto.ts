@@ -41,6 +41,7 @@ export class BookDto {
         const dto = new BookDto();
         dto.id = book.id;
         dto.title = book.title;
+        dto.photo = book.photo;
         dto.author = book.author;
         dto.publisher = book.publisher;
         dto.publicationDate = book.publicationDate;
@@ -79,5 +80,11 @@ export class BookDto {
         dto.photo = book.photo;
         dto.description = book.description;
         return dto;
+    }
+
+    public getBookList(books: Book[]): BookDto[] {
+        const list: BookDto[] = [];
+        books.forEach(book => list.push(this.from(book)));
+        return list;
     }
 }

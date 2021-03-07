@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
+import { LENGTH, PAGE_SIZE, PAGE_SIZE_OPTIONS } from 'src/app/constants/constants';
 import { BookDto } from 'src/app/dtos/book.dto';
-import { Book } from 'src/app/models/book';
 import { BookService } from 'src/app/service/book.service';
 
 @Component({
@@ -12,36 +15,79 @@ import { BookService } from 'src/app/service/book.service';
 })
 export class HomeComponent implements OnInit {
 
-  public filterQuery = "";
-  public rowsOnPage = 5;
 
-  private book: Book;
-  private bookDtos: BookDto[];
+  paramFormData: FormData;
+  displayedColumns: string[] = ['slNo', 'photo', 'title', 'ourPrice', 'description'];
+
+  dataSource: any;
+  dto: BookDto = new BookDto();
+  pageSize = PAGE_SIZE;
+  length = LENGTH;
+  pageSizeOptions = PAGE_SIZE_OPTIONS;
+  bookForm: FormGroup;
+
+  @ViewChild('booksPaginator', { static: false }) booksPaginator: MatPaginator;
+  @ViewChild('booksSort', { static: true }) booksSort: MatSort;
 
   constructor(
     private bookService: BookService,
-    private router: Router,
-    private route: ActivatedRoute
-  ) { }
+    private fb: FormBuilder,
+    private cdr: ChangeDetectorRef,
+    private router: Router
+  ) {
+    this.paramFormData = new FormData();
+  }
 
   ngOnInit(): void {
+    this.initDefaultParams();
+    this.getBooks();
+    this.formInit();
   }
 
-  getBookList() {
-    this.route.queryParams.subscribe(params => {
-      if (params['bookList']) {
-        console.log("filtered book list");
-        this.bookDtos = JSON.parse(params['bookList']);
-      } else {
-        this.bookService.getBookList().subscribe(response => {
-          console.log(response.json());
-          this.bookDtos = response.json();
-        }, error => {
-          console.log(error);
-        }
-        );
-      }
+  initDefaultParams() {
+    this.paramFormData.append('page', '0');
+    this.paramFormData.append('size', '10');
+    this.paramFormData.append('title', '');
+  }
+
+  formInit() {
+    this.bookForm = this.fb.group({
+      title: ['']
     });
   }
-  
+
+  onSubmit() {
+    this.formData();
+    this.getBooks();
+  }
+
+  formData() {
+    this.paramFormData.set('title', this.bookForm.value.title);
+  }
+
+  getBooks() {
+    this.bookService.getBookList(this.paramFormData).subscribe(data => {
+      this.dataSource = new MatTableDataSource<BookDto>(this.dto.getBookList(data.data.lists));
+      this.cdr.detectChanges();
+      if (this.length != data.data.total) {
+        this.length = data.data.total;
+      }
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  async getNext(event: PageEvent) {
+    this.paramFormData.set('page', event.pageIndex.toString());
+    this.paramFormData.set('size', event.pageSize.toString());
+    await this.getBooks();
+  }
+
+  reloadCurrentRoute() {
+    const currentUrl = this.router.url;
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl]);
+    });
+  }
+
 }

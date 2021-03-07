@@ -1,0 +1,97 @@
+table {
+  width: 100%;
+  text-align: left;
+}
+
+.component-container {
+  /* width: 90%; */
+  margin: 0 auto;
+}
+
+.mat-table th {
+  border-top: 1px solid #e0e0e0;
+}
+
+.mat-table th,
+.mat-table td {
+  border-right: 1px solid #e0e0e0;
+}
+
+tr td:first-child,
+th:first-child {
+  border-left: 1px solid #e0e0e0;
+}
+
+td.mat-cell,
+th.mat-header-cell {
+  padding-left: 24px;
+}
+
+.schedule-header h3 {
+  color: #72c02c !important;
+  font-size: 24px;
+  /* margin: 10px; */
+}
+
+#schedule {
+  width: 90%;
+  margin: 5px auto;
+  padding: 10px;
+  min-height: 470px;
+}
+
+.mat-row:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.mat-row:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+.mat-form-field {
+  font-size: 12px;
+}
+.button-part {
+  margin-bottom: 10px;
+}
+.button-part button {
+  margin: 0px 10px;
+  width: 130px;
+  height: 35px;
+}
+
+::ng-deep .mat-form-field-flex > .mat-form-field-infix {
+  padding: 0.4em 0px !important;
+}
+::ng-deep .mat-form-field-label-wrapper {
+  top: -1.5em;
+}
+
+::ng-deep
+  .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float
+  .mat-form-field-label {
+  transform: translateY(-1.1em) scale(0.75);
+  width: 133.33333%;
+}
+.mat-drawer-container {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.cptu-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.col-form-label {
+  padding-top: calc(0.375rem + 1px);
+  padding-bottom: calc(0.375rem + 1px);
+  margin-bottom: 0;
+  font-size: inherit;
+  line-height: 1.5;
+  text-align: end;
+}
